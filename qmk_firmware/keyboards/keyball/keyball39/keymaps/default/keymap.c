@@ -20,6 +20,21 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "quantum.h"
 
+// Layer
+#define L1_SPC LT(1, KC_SPC)
+#define L2_ENT LT(2, KC_ENT)
+#define L3_LG1 LT(3, KC_LNG1)
+// Modifier-Tap
+#define MT_S_LNG2 LSFT_T(KC_LNG2)
+// Modifiers
+#define M_SG_4 SGUI(KC_4) // ScreenShot for mac
+#define M_A_SC LALT(KC_SPC)
+#define M_C_UP LCTL(KC_UP)
+#define M_CS_T RCS(KC_T)
+#define M_CS_SC RCS(KC_SPC)
+#define M_A_GRV LALT(KC_GRV)
+#define M_S_ENT LSFT(KC_ENT)
+
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // keymap for default
@@ -27,20 +42,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_Q     , KC_W     , KC_E     , KC_R     , KC_T     ,                            KC_Y     , KC_U     , KC_I     , KC_O     , KC_P     ,
     KC_A     , KC_S     , KC_D     , KC_F     , KC_G     ,                            KC_H     , KC_J     , KC_K     , KC_L     , KC_MINS  ,
     KC_Z     , KC_X     , KC_C     , KC_V     , KC_B     ,                            KC_N     , KC_M     , KC_COMM  , KC_DOT   , KC_SLSH  ,
-    KC_LCTL  , KC_LGUI  , KC_LALT  ,LSFT_T(KC_LANG2),LT(1,KC_SPC),LT(3,KC_LANG1),KC_BSPC,LT(2,KC_ENT),LSFT_T(KC_LANG2),KC_RALT,KC_RGUI, KC_RSFT
+    KC_LCTL  , KC_LGUI  , KC_LALT  , MT_S_LNG2, L1_SPC   , L3_LG1   ,        KC_BSPC, L2_ENT   , MT_S_LNG2, KC_RALT  , KC_RGUI  , KC_RSFT
   ),
 
   [1] = LAYOUT_universal(
     KC_F1    , KC_F2    , KC_F3    , KC_F4    , KC_RBRC  ,                            KC_F6    , KC_F7    , KC_F8    , KC_F9    , KC_F10   ,
-    KC_F5    , KC_EXLM  , S(KC_6)  ,S(KC_INT3), S(KC_8)  ,                           S(KC_INT1), KC_BTN1  , KC_PGUP  , KC_BTN2  , KC_SCLN  ,
+    KC_F5    , KC_BTN2  , KC_BTN3  , KC_BTN1  , S(KC_8)  ,                           S(KC_INT1), KC_BTN1  , KC_PGUP  , KC_BTN2  , KC_SCLN  ,
     S(KC_EQL),S(KC_LBRC),S(KC_7)   , S(KC_2)  ,S(KC_RBRC),                            KC_LBRC  , KC_DLR   , KC_PGDN  , KC_BTN3  , KC_F11   ,
     KC_INT1  , KC_EQL   , S(KC_3)  , _______  , _______  , _______  ,        TO(2) ,  TO(0)    , _______  , KC_RALT  , KC_RGUI  , KC_F12
   ),
 
   [2] = LAYOUT_universal(
-    KC_TAB   , KC_7     , KC_8     , KC_9     , KC_MINS  ,                            KC_NUHS  , _______  , KC_BTN3  , _______  , KC_BSPC  ,
-   S(KC_QUOT), KC_4     , KC_5     , KC_6     ,S(KC_SCLN),                            S(KC_9)  , KC_BTN1  , KC_UP    , KC_BTN2  , KC_QUOT  ,
-    KC_SLSH  , KC_1     , KC_2     , KC_3     ,S(KC_MINS),                           S(KC_NUHS), KC_LEFT  , KC_DOWN  , KC_RGHT  , _______  ,
+    KC_TAB   , KC_7     , KC_8     , KC_9     , KC_MINS  ,                            KC_NUHS  , _______  , _______  , _______  , KC_BSPC  ,
+   S(KC_QUOT), KC_4     , KC_5     , KC_6     ,S(KC_SCLN),                            KC_LEFT  , KC_DOWN  , KC_UP    , KC_RGHT  , KC_QUOT  ,
+    KC_SLSH  , KC_1     , KC_2     , KC_3     ,S(KC_MINS),                           S(KC_NUHS), _______  , _______  , _______  , _______  ,
     KC_ESC   , KC_0     , KC_DOT   , KC_DEL   , KC_ENT   , KC_BSPC  ,      _______ ,  _______  , _______  , _______  , _______  , _______
   ),
 
