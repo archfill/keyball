@@ -20,43 +20,105 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "quantum.h"
 
+// Layer
+#define L1_SPC LT(1, KC_SPC)
+#define L2_ENT LT(2, KC_ENT)
+#define L3_LG1 LT(3, KC_LNG1)
+// Modifier-Tap
+#define MT_S_LNG2 LSFT_T(KC_LNG2)
+// Modifiers
+#define M_SG_4 SGUI(KC_4) // ScreenShot for mac
+#define M_A_SC LALT(KC_SPC)
+#define M_C_UP LCTL(KC_UP)
+#define M_CS_T RCS(KC_T)
+#define M_CS_SC RCS(KC_SPC)
+#define M_A_GRV LALT(KC_GRV)
+#define M_S_ENT LSFT(KC_ENT)
+
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // keymap for default (VIA)
   [0] = LAYOUT_universal(
     KC_Q     , KC_W     , KC_E     , KC_R     , KC_T     ,                            KC_Y     , KC_U     , KC_I     , KC_O     , KC_P     ,
-    KC_A     , KC_S     , KC_D     , KC_F     , KC_G     ,                            KC_H     , KC_J     , KC_K     , KC_L     , KC_SCLN  ,
+    KC_A     , KC_S     , KC_D     , KC_F     , KC_G     ,                            KC_H     , KC_J     , KC_K     , KC_L     , KC_MINS  ,
     KC_Z     , KC_X     , KC_C     , KC_V     , KC_B     ,                            KC_N     , KC_M     , KC_COMM  , KC_DOT   , KC_SLSH  ,
-    KC_LCTL  , KC_LGUI  , KC_LALT  ,LT(1,KC_LANG2),LT(2,KC_SPC),LT(3,KC_LANG1),KC_BSPC,LT(2,KC_ENT),LT(1,KC_LANG2),KC_RALT,KC_RGUI, KC_RSFT
+    KC_LCTL  , KC_LGUI  , KC_LALT  , MT_S_LNG2,LT(1,KC_SPC),LT(3,KC_LNG1),KC_BSPC,LT(2,KC_ENT),LT(1,KC_LNG2), KC_RALT, KC_RGUI  , LT(3,KC_ESC)
   ),
 
   [1] = LAYOUT_universal(
-    S(KC_Q)   , S(KC_W) , S(KC_E)  , S(KC_R)  , S(KC_T)  ,                            S(KC_Y)  , S(KC_U)  , S(KC_I)  , S(KC_O)  , S(KC_P)  ,
-    S(KC_A)   , S(KC_S) , S(KC_D)  , S(KC_F)  , S(KC_G)  ,                            S(KC_H)  , S(KC_J)  , S(KC_K)  , S(KC_L)  , KC_QUOT  ,
-    S(KC_Z)   , S(KC_X) , S(KC_C)  , S(KC_V)  , S(KC_B)  ,                            S(KC_N)  , S(KC_M)  ,S(KC_COMM), S(KC_DOT),S(KC_SLSH),
+    KC_F1     , KC_F2   , KC_F3    , KC_F4    , KC_F5    ,                            KC_F6    , KC_F7    , KC_F8    , KC_F9    , KC_F10   ,
+    KC_1      , KC_2    , KC_3     , KC_4     , KC_5     ,                            KC_6     , KC_7     , KC_8     , KC_9     , KC_0     ,
+    KC_F11    , _______ , _______  , _______  , KC_TAB   ,                            KC_ESC   , _______  , _______  , _______  , KC_F12   ,
     KC_LCTL   , KC_LGUI , KC_LALT  , _______  , _______  , _______  ,      _______  , _______  , _______  , KC_RALT  , KC_RGUI  , KC_RSFT
   ),
 
   [2] = LAYOUT_universal(
-    _______   , KC_7    , KC_8     , KC_9     , _______  ,                            _______  , KC_LEFT  , KC_UP    , KC_RGHT  , _______  ,
-    _______   , KC_4    , KC_5     , KC_6     ,S(KC_SCLN),                            KC_PGUP  , KC_BTN1  , KC_DOWN  , KC_BTN2  , KC_BTN3  ,
-    _______   , KC_1    , KC_2     , KC_3     ,S(KC_MINS),                            KC_PGDN  , _______  , _______  , _______  , _______  ,
-    _______   , KC_0    , KC_DOT   , _______  , _______  , _______  ,      KC_DEL   , _______  , _______  , _______  , _______  , _______
+    KC_BSLS   , KC_CIRC , KC_EXLM  , KC_AMPR  , KC_PIPE  ,                            KC_AT    , KC_EQL   , KC_PLUS  , KC_ASTR  , KC_PERC  ,
+    KC_HASH   , KC_DLR  , KC_DQUO  , KC_QUOT  , KC_TILD  ,                            KC_LEFT  , KC_DOWN  , KC_UP    , KC_RGHT  , KC_GRV   ,
+    KC_LSFT   , KC_COLN , KC_LPRN  , KC_LCBR  , KC_LBRC  ,                            KC_RBRC  , KC_RCBR  , KC_RPRN  , KC_SCLN  , XXXXXXX  ,
+    _______   , _______ , _______  , _______  , _______  , _______  ,      KC_DEL   , _______  , _______  , _______  , _______  , _______
   ),
 
   [3] = LAYOUT_universal(
     RGB_TOG  , _______  , _______  , _______  ,  _______  ,                           RGB_M_P  , RGB_M_B  , RGB_M_R  , RGB_M_SW , RGB_M_SN ,
     RGB_MOD  , RGB_HUI  , RGB_SAI  , RGB_VAI  ,  SCRL_DVI ,                           RGB_M_K  , RGB_M_X  , RGB_M_G  , RGB_M_T  , RGB_M_TW ,
     RGB_RMOD , RGB_HUD  , RGB_SAD  , RGB_VAD  ,  SCRL_DVD ,                           CPI_D1K  , CPI_D100 , CPI_I100 , CPI_I1K  , KBC_SAVE ,
-    RESET    , KBC_RST  , _______  , _______  ,  _______  , _______  ,     _______  , _______  , _______  , _______  , KBC_RST  , RESET
+    QK_BOOT  , KBC_RST  , EE_CLR   , _______  ,  _______  , _______  ,     _______  , _______  , _______  , EE_CLR   , KBC_RST  , QK_BOOT
+  ),
+
+  [4] = LAYOUT_universal(
+    _______   , _______ , _______  , _______  , _______  ,                            _______  , _______  , _______  , _______  , _______  ,
+    _______   , _______ , _______  , _______  , _______  ,                            _______  , KC_BTN1  , KC_BTN3  , KC_BTN2  , _______  ,
+    _______   , _______ , _______  , _______  , _______  ,                            _______  , KC_BTN4  , _______  , KC_BTN5  , _______  ,
+    _______   , _______ , _______  , _______  , _______  , _______  ,      _______  , _______  , _______  , _______  , _______  , _______
   ),
 };
 // clang-format on
 
 layer_state_t layer_state_set_user(layer_state_t state) {
-    // Auto enable scroll mode when the highest layer is 3
-    keyball_set_scroll_mode(get_highest_layer(state) == 3);
+    switch(get_highest_layer(remove_auto_mouse_layer(state, true))) {
+        case 3:
+            // Auto enable scroll mode when the highest layer is 3
+            // remove_auto_mouse_target must be called to adjust state *before* setting enable
+            state = remove_auto_mouse_layer(state, false);
+            set_auto_mouse_enable(false);
+            keyball_set_scroll_mode(true);
+            break;
+        default:
+            set_auto_mouse_enable(true);
+            keyball_set_scroll_mode(false);
+            break;
+    }
+
+    // LOWER + RAISE = ADJUST のようなTri Layersを使う場合
+    // これを先に書いておかないと3の色がおかしくなる
+    // state = update_tri_layer_state(state, 1, 2, 3);
+
+    uint8_t layer = biton32(state);
+    switch (layer) {
+        case 0:
+            rgblight_sethsv(HSV_RED);
+            break;
+        case 1:
+            rgblight_sethsv(HSV_BLUE);
+            break;
+        case 2:
+            rgblight_sethsv(HSV_GREEN);
+            break;
+        case 3:
+            rgblight_sethsv(HSV_PURPLE);
+            break;
+        case 4:
+            rgblight_sethsv(HSV_ORANGE);
+            break;
+    }
+
     return state;
+}
+
+void pointing_device_init_user(void) {
+    // set_auto_mouse_layer(<mouse_layer>); // only required if AUTO_MOUSE_DEFAULT_LAYER is not set to index of <mouse_layer>
+    set_auto_mouse_enable(true);         // always required before the auto mouse feature will work
 }
 
 #ifdef OLED_ENABLE

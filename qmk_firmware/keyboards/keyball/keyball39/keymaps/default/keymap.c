@@ -20,43 +20,122 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "quantum.h"
 
+// Layer
+#define L1_SPC LT(1, KC_SPC)
+#define L2_ENT LT(2, KC_ENT)
+#define L3_LG1 LT(3, KC_LNG1)
+#define L3_ESC LT(3, KC_ESC)
+// Modifier-Tap
+#define MTSLNG2 LSFT_T(KC_LNG2)
+#define MTSBSPC LSFT_T(KC_BSPC)
+// Modifiers
+#define M_SG_4 SGUI(KC_4) // ScreenShot for mac
+#define M_A_SC LALT(KC_SPC)
+#define M_C_UP LCTL(KC_UP)
+#define M_CS_T RCS(KC_T)
+#define M_CS_SC RCS(KC_SPC)
+#define M_A_GRV LALT(KC_GRV)
+#define M_S_ENT LSFT(KC_ENT)
+
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // keymap for default
   [0] = LAYOUT_universal(
-    KC_Q     , KC_W     , KC_E     , KC_R     , KC_T     ,                            KC_Y     , KC_U     , KC_I     , KC_O     , KC_P     ,
-    KC_A     , KC_S     , KC_D     , KC_F     , KC_G     ,                            KC_H     , KC_J     , KC_K     , KC_L     , KC_MINS  ,
-    KC_Z     , KC_X     , KC_C     , KC_V     , KC_B     ,                            KC_N     , KC_M     , KC_COMM  , KC_DOT   , KC_SLSH  ,
-    KC_LCTL  , KC_LGUI  , KC_LALT  ,LSFT_T(KC_LANG2),LT(1,KC_SPC),LT(3,KC_LANG1),KC_BSPC,LT(2,KC_ENT),LSFT_T(KC_LANG2),KC_RALT,KC_RGUI, KC_RSFT
+    KC_Q     , KC_W     , KC_E     , KC_R     , KC_T     ,                           KC_Y     , KC_U     , KC_I     , KC_O     , KC_P     ,
+    KC_A     , KC_S     , KC_D     , KC_F     , KC_G     ,                           KC_H     , KC_J     , KC_K     , KC_L     , KC_MINS  ,
+    KC_Z     , KC_X     , KC_C     , KC_V     , KC_B     ,                           KC_N     , KC_M     , KC_COMM  , KC_DOT   , KC_SLSH  ,
+    KC_LCTL  , KC_LALT  , KC_LGUI  , MTSLNG2  , L1_SPC   , L3_LG1   ,     MTSBSPC  , L2_ENT   , _______  , _______  , _______  , L3_ESC
   ),
 
   [1] = LAYOUT_universal(
-    KC_F1    , KC_F2    , KC_F3    , KC_F4    , KC_RBRC  ,                            KC_F6    , KC_F7    , KC_F8    , KC_F9    , KC_F10   ,
-    KC_F5    , KC_EXLM  , S(KC_6)  ,S(KC_INT3), S(KC_8)  ,                           S(KC_INT1), KC_BTN1  , KC_PGUP  , KC_BTN2  , KC_SCLN  ,
-    S(KC_EQL),S(KC_LBRC),S(KC_7)   , S(KC_2)  ,S(KC_RBRC),                            KC_LBRC  , KC_DLR   , KC_PGDN  , KC_BTN3  , KC_F11   ,
-    KC_INT1  , KC_EQL   , S(KC_3)  , _______  , _______  , _______  ,        TO(2) ,  TO(0)    , _______  , KC_RALT  , KC_RGUI  , KC_F12
+    KC_F1    , KC_F2    , KC_F3    , KC_F4    , KC_F5    ,                           KC_F6    , KC_F7    , KC_F8    , KC_F9    , KC_F10   ,
+    KC_1     , KC_2     , KC_3     , KC_4     , KC_5     ,                           KC_6     , KC_7     , KC_8     , KC_9     , KC_0     ,
+    KC_F11   , _______  , _______  , _______  , KC_TAB   ,                           KC_ESC   , _______  , _______  , _______  , KC_F12   ,
+    KC_LCTL  , KC_LGUI  , KC_LALT  , _______  , _______  , _______  ,     _______  , _______  , _______  , _______  , _______  , KC_RSFT
   ),
 
   [2] = LAYOUT_universal(
-    KC_TAB   , KC_7     , KC_8     , KC_9     , KC_MINS  ,                            KC_NUHS  , _______  , KC_BTN3  , _______  , KC_BSPC  ,
-   S(KC_QUOT), KC_4     , KC_5     , KC_6     ,S(KC_SCLN),                            S(KC_9)  , KC_BTN1  , KC_UP    , KC_BTN2  , KC_QUOT  ,
-    KC_SLSH  , KC_1     , KC_2     , KC_3     ,S(KC_MINS),                           S(KC_NUHS), KC_LEFT  , KC_DOWN  , KC_RGHT  , _______  ,
-    KC_ESC   , KC_0     , KC_DOT   , KC_DEL   , KC_ENT   , KC_BSPC  ,      _______ ,  _______  , _______  , _______  , _______  , _______
+    KC_BSLS  , KC_CIRC  , KC_EXLM  , KC_AMPR  , KC_PIPE  ,                           KC_AT    , KC_EQL   , KC_PLUS  , KC_ASTR  , KC_PERC  ,
+    KC_HASH  , KC_DLR   , KC_DQUO  , KC_QUOT  , KC_TILD  ,                           KC_LEFT  , KC_DOWN  , KC_UP    , KC_RGHT  , KC_GRV   ,
+    KC_LSFT  , KC_COLN  , KC_LPRN  , KC_LCBR  , KC_LBRC  ,                           KC_RBRC  , KC_RCBR  , KC_RPRN  , KC_SCLN  , XXXXXXX  ,
+    _______  , _______  , _______  , _______  , _______  , _______  ,     KC_DEL   , _______  , _______  , _______  , _______  , _______
   ),
 
   [3] = LAYOUT_universal(
-    RGB_TOG  , _______  , _______  , _______  , _______  ,                            RGB_M_P  , RGB_M_B  , RGB_M_R  , RGB_M_SW , RGB_M_SN ,
-    RGB_MOD  , RGB_HUI  , RGB_SAI  , RGB_VAI  , SCRL_DVI ,                            RGB_M_K  , RGB_M_X  , RGB_M_G  , RGB_M_T  , RGB_M_TW ,
-    RGB_RMOD , RGB_HUD  , RGB_SAD  , RGB_VAD  , SCRL_DVD ,                            CPI_D1K  , CPI_D100 , CPI_I100 , CPI_I1K  , KBC_SAVE ,
-    RESET    , KBC_RST  , _______  , _______  , _______  , _______  ,      _______ ,  _______  , _______  , _______  , KBC_RST  , RESET
+    RGB_TOG  , SCRL_DVD , SCRL_DVI , _______  , _______  ,                           CPI_D1K  , CPI_D100 , CPI_I100 , CPI_I1K  , _______  ,
+    _______  , _______  , _______  , _______  , _______  ,                           _______  , KC_BTN1  , KC_BTN3  , KC_BTN2  , _______  ,
+    _______  , _______  , _______  , _______  , _______  ,                           _______  , KC_BTN4  , _______  , KC_BTN5  , KBC_SAVE ,
+    QK_BOOT  , KBC_RST  , EE_CLR   , _______  , _______  , _______  ,     _______  , _______  , _______  , _______  , _______  , _______
+  ),
+
+  [4] = LAYOUT_universal(
+    _______  , _______  , _______  , _______  , _______  ,                           _______  , _______  , _______  , _______  , _______  ,
+    _______  , _______  , _______  , _______  , _______  ,                           _______  , KC_BTN1  , KC_BTN3  , KC_BTN2  , _______  ,
+    _______  , _______  , _______  , _______  , _______  ,                           _______  , KC_BTN4  , _______  , KC_BTN5  , _______  ,
+    _______  , _______  , _______  , _______  , _______  , _______  ,     _______  , _______  , _______  , _______  , _______  , _______
   ),
 };
 // clang-format on
 
 layer_state_t layer_state_set_user(layer_state_t state) {
-    // Auto enable scroll mode when the highest layer is 3
-    keyball_set_scroll_mode(get_highest_layer(state) == 3);
+    switch(get_highest_layer(remove_auto_mouse_layer(state, true))) {
+        case 3:
+            // Auto enable scroll mode when the highest layer is 3
+            // remove_auto_mouse_target must be called to adjust state *before* setting enable
+            state = remove_auto_mouse_layer(state, false);
+            set_auto_mouse_enable(false);
+            keyball_set_scroll_mode(true);
+            break;
+        default:
+            set_auto_mouse_enable(true);
+            keyball_set_scroll_mode(false);
+            break;
+    }
+
+    // LOWER + RAISE = ADJUST のようなTri Layersを使う場合
+    // これを先に書いておかないと3の色がおかしくなる
+    // state = update_tri_layer_state(state, 1, 2, 3);
+    // if (is_layer == 1) {
+    //   hsv.h = 128; //CYAN
+    // } else if (is_layer == 2)  {
+    //   hsv.h = 85; //GREEN
+    // } else if (is_layer == 3)  {
+    //   hsv.h = 43; //YELLOW
+    // } else if (is_layer == 4)  {
+    //   hsv.h = 11; //CORAL
+    // } else if (is_layer == 5)  {
+    //   hsv.h = 0; //RED
+    // } else if (is_layer == 6)  {
+    //   hsv.h = 64; //CHARTREUSE
+    // } else {
+    //   hsv.h = 191; //PURPLE
+    // }
+
+    uint8_t layer = biton32(state);
+    switch (layer) {
+        case 0:
+            rgblight_sethsv(HSV_PURPLE);
+            break;
+        case 1:
+            rgblight_sethsv(HSV_BLUE);
+            break;
+        case 2:
+            rgblight_sethsv(HSV_GREEN);
+            break;
+        case 3:
+            rgblight_sethsv(HSV_RED);
+            break;
+        case 4:
+            rgblight_sethsv(HSV_OFF);
+            break;
+    }
+
     return state;
+}
+
+void pointing_device_init_user(void) {
+    // set_auto_mouse_layer(<mouse_layer>); // only required if AUTO_MOUSE_DEFAULT_LAYER is not set to index of <mouse_layer>
+    set_auto_mouse_enable(true);         // always required before the auto mouse feature will work
 }
 
 #ifdef OLED_ENABLE

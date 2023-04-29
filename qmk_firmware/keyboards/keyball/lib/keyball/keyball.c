@@ -165,8 +165,13 @@ static void motion_to_mouse_scroll(keyball_motion_t *m, report_mouse_t *r, bool 
 
     // apply to mouse report.
 #if KEYBALL_MODEL == 61 || KEYBALL_MODEL == 39 || KEYBALL_MODEL == 147 || KEYBALL_MODEL == 44
-    r->h = clip2int8(y);
-    r->v = -clip2int8(x);
+    // default
+    // r->h = clip2int8(y);
+    // r->v = -clip2int8(x);
+
+    // reverse
+    r->h = -clip2int8(y);
+    r->v = clip2int8(x);
     if (is_left) {
         r->h = -r->h;
         r->v = -r->v;
@@ -499,12 +504,12 @@ bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
 #ifndef MOUSEKEY_ENABLE
         // process KC_MS_BTN1~8 by myself
         // See process_action() in quantum/action.c for details.
-        case KC_MS_BTN1 ... KC_MS_BTN8: {
-            extern void register_button(bool, enum mouse_buttons);
-            register_button(record->event.pressed, MOUSE_BTN_MASK(keycode - KC_MS_BTN1));
-            // to apply QK_MODS actions, allow to process others.
-            return true;
-        }
+        // case KC_MS_BTN1 ... KC_MS_BTN8: {
+        //     extern void register_button(bool, enum mouse_buttons);
+        //     register_button(record->event.pressed, MOUSE_BTN_MASK(keycode - KC_MS_BTN1));
+        //     // to apply QK_MODS actions, allow to process others.
+        //     return true;
+        // }
 #endif
 
         case SCRL_MO:

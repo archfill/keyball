@@ -34,3 +34,5 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #endif
 
 #define TAP_CODE_DELAY 5
+/* VIA */
+#define DYNAMIC_KEYMAP_LAYER_COUNT 5
