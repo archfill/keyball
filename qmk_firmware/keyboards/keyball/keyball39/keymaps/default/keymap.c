@@ -62,10 +62,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
   [3] = LAYOUT_universal(
-    RGB_TOG  , SCRL_DVD , SCRL_DVI , _______  , _______  ,                           CPI_D1K  , CPI_D100 , CPI_I100 , CPI_I1K  , _______  ,
-    _______  , _______  , _______  , _______  , _______  ,                           _______  , KC_BTN1  , KC_BTN3  , KC_BTN2  , _______  ,
+    RGB_TOG  , SCRL_DVD , SCRL_DVI , _______  , M_CS_T   ,                           CPI_D1K  , CPI_D100 , CPI_I100 , CPI_I1K  , _______  ,
+    _______  , _______  , _______  , M_A_SC   , _______  ,                           _______  , KC_BTN1  , KC_BTN3  , KC_BTN2  , _______  ,
     _______  , _______  , _______  , _______  , _______  ,                           _______  , KC_BTN4  , _______  , KC_BTN5  , KBC_SAVE ,
-    QK_BOOT  , KBC_RST  , EE_CLR   , _______  , _______  , _______  ,     _______  , _______  , _______  , _______  , _______  , _______
+    QK_BOOT  , KBC_RST  , EE_CLR   , _______  , _______  , _______  ,     _______  , _______  , _______  , _______  , _______  , KC_INS
   ),
 
   [4] = LAYOUT_universal(
