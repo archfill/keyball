@@ -212,15 +212,12 @@ void x_finished_1(tap_dance_state_t *state, void *user_data) {
   switch (xtap_state.state) {
     case TD_SINGLE_TAP:
         register_code(is_lang_jp ? KC_LNG2 : KC_LNG1);
-        is_lang_jp = !is_lang_jp;
         break;
     case TD_SINGLE_HOLD:
         register_code(is_lang_jp ? KC_LNG2 : KC_LNG1);
-        is_lang_jp = !is_lang_jp;
         break;
     case TD_DOUBLE_TAP:
         register_code(is_lang_jp ? KC_LNG2 : KC_LNG1);
-        is_lang_jp = !is_lang_jp;
         break;
     default:
         break;
@@ -289,5 +286,11 @@ tap_dance_action_t tap_dance_actions[] = {
 void oledkit_render_info_user(void) {
     keyball_oled_render_keyinfo();
     keyball_oled_render_ballinfo();
+    oled_write_P(PSTR("LNG:"), false);
+    if (is_lang_jp) {
+        oled_write_P(PSTR("JA"), false);
+    } else {
+        oled_write_P(PSTR("EN"), false);
+    }
 }
 #endif
