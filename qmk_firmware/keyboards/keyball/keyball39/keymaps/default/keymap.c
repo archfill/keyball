@@ -64,6 +64,7 @@ enum {
 // #define TD_AB_BS TD(X_TAP_DANCE_2)
 
 bool is_lang_jp = false;
+uint8_t layer = 0;
 
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -86,7 +87,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_BSLS  , KC_CIRC  , KC_EXLM  , KC_AMPR  , KC_PIPE  ,                            KC_AT    , KC_EQL   , KC_PLUS  , KC_ASTR  , KC_PERC  ,
     KC_HASH  , KC_DLR   , KC_DQUO  , KC_QUOT  , KC_TILD  ,                            KC_LEFT  , KC_DOWN  , KC_UP    , KC_RGHT  , KC_GRV   ,
     KC_LSFT  , KC_COLN  , KC_LPRN  , KC_LCBR  , KC_LBRC  ,                            KC_RBRC  , KC_RCBR  , KC_RPRN  , KC_SCLN  , XXXXXXX  ,
-    _______  , _______  , _______  , _______  , _______  , _______  ,      KC_DEL   , _______  , _______  , _______  , _______  , _______
+    _______  , _______  , _______  , _______  , _______  , _______  ,      _______  , _______  , _______  , _______  , _______  , _______
   ),
 
   [3] = LAYOUT_universal(
@@ -120,7 +121,7 @@ layer_state_t layer_state_set_user(layer_state_t state) {
             break;
     }
 
-    uint8_t layer = biton32(state);
+    layer = biton32(state);
     switch (layer) {
         case 0:
             rgblight_sethsv(HSV_PURPLE);
@@ -292,5 +293,7 @@ void oledkit_render_info_user(void) {
     } else {
         oled_write_P(PSTR("EN"), false);
     }
+    oled_write_P(PSTR(" LAYER:"), false);
+    oled_write_char('0' + layer, false);
 }
 #endif
