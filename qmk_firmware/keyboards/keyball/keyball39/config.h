@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #pragma once
 
-#include "config_common.h"
+// #include "config_common.h"
 
 // USB Device descriptor parameters
 // #define VENDOR_ID           0x5957      // "YW" = Yowkees
@@ -26,6 +26,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // #define DEVICE_VER          0x0001
 // #define MANUFACTURER        Yowkees
 // #define PRODUCT             Keyball39
+
+#define TAPPING_FORCE_HOLD
+#define TAPPING_TERM 200
+// #define TAPPING_TERM_PER_KEY
+#define IGNORE_MOD_TAP_INTERRUPT
 
 // Key matrix parameters
 #define MATRIX_ROWS         (4 * 2)  // split keyboard
