@@ -249,6 +249,20 @@ report_mouse_t pointing_device_driver_get_report(report_mouse_t rep) {
     return rep;
 }
 
+bool is_mouse_record_kb(uint16_t keycode, keyrecord_t* record) {
+    switch(keycode) {
+        case KC_LCTL:
+            return true;
+        case KC_LSFT:
+            return true;
+        case KC_LGUI:
+            return true;
+        default:
+            return false;
+    }
+    return is_mouse_record_user(keycode, record);
+}
+
 //////////////////////////////////////////////////////////////////////////////
 // Split RPC
 

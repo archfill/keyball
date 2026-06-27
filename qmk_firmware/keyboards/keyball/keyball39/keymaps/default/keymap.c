@@ -24,10 +24,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define L1_SPC LT(1, KC_SPC)
 #define L2_ENT LT(2, KC_ENT)
 #define L3_LG1 LT(3, KC_LNG1)
+#define L4_LG1 LT(4, KC_LNG1)
+#define L5_LG1 LT(5, KC_LNG1)
 // Modifier-Tap
 #define MT_S_LNG2 LSFT_T(KC_LNG2)
 #define MT_S_BSPC LSFT_T(KC_BSPC)
 #define MT_C_LNG2 LCTL_T(KC_LNG2)
+#define MT_G_LNG2 LGUI_T(KC_LNG2)
 // Modifiers
 #define M_SG_4 SGUI(KC_4) // ScreenShot for mac
 #define M_A_SC LALT(KC_SPC)
@@ -37,6 +40,21 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define M_A_GRV LALT(KC_GRV)
 #define M_S_ENT LSFT(KC_ENT)
 #define M_S_TAB LSFT(KC_TAB)
+
+#define M_A_H LALT(KC_H)
+#define M_A_J LALT(KC_J)
+#define M_A_K LALT(KC_K)
+#define M_A_L LALT(KC_L)
+
+#define M_SA_H LSA(KC_H)
+#define M_SA_J LSA(KC_J)
+#define M_SA_K LSA(KC_K)
+#define M_SA_L LSA(KC_L)
+
+#define M_G_Z LGUI(KC_Z)
+#define M_G_X LGUI(KC_X)
+#define M_G_C LGUI(KC_C)
+#define M_G_V LGUI(KC_V)
 
 // Tap Dance
 typedef enum {
@@ -68,12 +86,12 @@ uint8_t layer = 0;
 
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-  // keymap for default (VIA)
+  // keymap for default
   [0] = LAYOUT_universal(
     KC_Q     , KC_W     , KC_E     , KC_R     , KC_T     ,                            KC_Y     , KC_U     , KC_I     , KC_O     , KC_P     ,
     KC_A     , KC_S     , KC_D     , KC_F     , KC_G     ,                            KC_H     , KC_J     , KC_K     , KC_L     , KC_MINS  ,
     KC_Z     , KC_X     , KC_C     , KC_V     , KC_B     ,                            KC_N     , KC_M     , KC_COMM  , KC_DOT   , KC_SLSH  ,
-    KC_LGUI  , KC_LGUI  , KC_LALT  , MT_S_LNG2, L1_SPC   , MT_C_LNG2,      MT_S_BSPC, L2_ENT   , L3_LG1   , KC_RALT  , KC_RGUI  , KC_TD_1
+    MT_G_LNG2, KC_LALT  , KC_LALT  , MT_S_LNG2, L1_SPC   , MT_C_LNG2,      MT_S_BSPC, L2_ENT   , L3_LG1   , MO(5)    , KC_RALT  , L4_LG1
   ),
 
   [1] = LAYOUT_universal(
@@ -99,8 +117,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [4] = LAYOUT_universal(
     _______  , _______  , _______  , _______  , _______  ,                            _______  , _______  , _______  , _______  , _______  ,
-    _______  , KC_BTN2  , KC_BTN3  , KC_BTN1  , _______  ,                            _______  , KC_BTN1  , KC_BTN3  , KC_BTN2  , _______  ,
-    _______  , KC_BTN5  , _______  , KC_BTN4  , _______  ,                            _______  , KC_BTN4  , _______  , KC_BTN5  , _______  ,
+    KC_LCTL  , KC_BTN2  , KC_BTN3  , KC_BTN1  , _______  ,                            _______  , KC_BTN1  , KC_BTN3  , KC_BTN2  , _______  ,
+    KC_LSFT  , KC_BTN5  , _______  , KC_BTN4  , _______  ,                            _______  , KC_BTN4  , _______  , KC_BTN5  , _______  ,
+    _______  , _______  , _______  , _______  , _______  , _______  ,      _______  , _______  , _______  , _______  , _______  , _______
+  ),
+
+  [5] = LAYOUT_universal(
+    _______  , _______  , _______  , _______  , _______  ,                            _______  , M_SA_H   , M_SA_J   , M_SA_K   , M_SA_L   ,
+    _______  , _______  , _______  , _______  , _______  ,                            _______  , M_A_H    , M_A_J    , M_A_K    , M_A_L    ,
+    M_G_Z    , M_G_X    , M_G_C    , M_G_V    , _______  ,                            _______  , _______  , _______  , _______  , _______  ,
     _______  , _______  , _______  , _______  , _______  , _______  ,      _______  , _______  , _______  , _______  , _______  , _______
   ),
 };
@@ -137,6 +162,9 @@ layer_state_t layer_state_set_user(layer_state_t state) {
             break;
         case 4:
             rgblight_sethsv(HSV_TEAL);
+            break;
+        case 5:
+            rgblight_sethsv(HSV_YELLOW);
             break;
     }
 
@@ -287,12 +315,12 @@ tap_dance_action_t tap_dance_actions[] = {
 void oledkit_render_info_user(void) {
     keyball_oled_render_keyinfo();
     keyball_oled_render_ballinfo();
-    oled_write_P(PSTR("LNG:"), false);
-    if (is_lang_jp) {
-        oled_write_P(PSTR("JA"), false);
-    } else {
-        oled_write_P(PSTR("EN"), false);
-    }
+    // oled_write_P(PSTR("LNG:"), false);
+    // if (is_lang_jp) {
+    //     oled_write_P(PSTR("JA"), false);
+    // } else {
+    //     oled_write_P(PSTR("EN"), false);
+    // }
     oled_write_P(PSTR(" LAYER:"), false);
     oled_write_char('0' + layer, false);
 }
